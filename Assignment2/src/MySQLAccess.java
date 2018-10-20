@@ -21,8 +21,7 @@ public class MySQLAccess {
 		// Establish logger
 		 logger = Logger.getLogger("Assignment2");
 		 host = "//localhost/";
-		 database = "d_malone";
-//		 database = "assignment2_5510";
+		 database = "assignment2_5510";
 		 table = "transaction";
 	}
 	
@@ -34,7 +33,7 @@ public class MySQLAccess {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			// Setup the connection with the DB
 			connection = DriverManager.getConnection("jdbc:mysql:"+ host + database + "?" 
-					+ "user=d_malone&password=A00426441" // Creds
+					+ "user=root&password=root" // Creds
 					+ "&useSSL=false" // b/c localhost
 					+ "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"); // timezone
 		} catch (Exception e) {

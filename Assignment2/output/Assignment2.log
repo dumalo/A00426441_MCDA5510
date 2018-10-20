@@ -1,15 +1,63 @@
-Oct 19, 2018 8:04:31 PM  
+Oct 20, 2018 8:44:50 AM MySQLAccess setupConnection
+INFO: Connection established to //localhost/assignment2_5510
+
+Oct 20, 2018 8:44:50 AM MySQLAccess getAllTransactions
+INFO: >> SELECT * FROM assignment2_5510.transaction;
+Oct 20, 2018 8:44:50 AM MySQLAccess printTransactions
+INFO: [ID: 1, NameOnCard: Sam, CardNumber: 11, ExpDate: test date, UnitPrice: 5.0, Quantity: 10, TotalPrice: 50.0, CreatedOn: 2018-11-16 07:00:00.0, CreatedBy: Cashier123]
+Oct 20, 2018 8:44:50 AM MySQLAccess printTransactions
+INFO: Completed.
+
+Oct 20, 2018 8:44:50 AM MySQLAccess createTransaction
+INFO: >> INSERT INTO assignment2_5510.transaction (ID, NameOnCard, CardNumber, UnitPrice, Quantity, TotalPrice, ExpDate, CreatedOn, CreatedBy) VALUES (2,'Dave',11,5.0,10,50.0,'test date','2018-11-16 11:00:00.0','Cashier123')
+Oct 20, 2018 8:44:50 AM MySQLAccess createTransaction
+INFO: Completed: 1 row(s) affected.
+
+Oct 20, 2018 8:44:50 AM MySQLAccess updateTransaction
+INFO: >> UPDATE assignment2_5510.transaction SET NameOnCard = 'Dave', CardNumber = 11, UnitPrice = 5.0, Quantity = 10, TotalPrice = 50.0, ExpDate = 'test date', CreatedOn = '2018-11-16 11:00:00.0', CreatedBy = 'Cashier123' WHERE ID = 2
+Oct 20, 2018 8:44:50 AM MySQLAccess updateTransaction
+INFO: Completed: 1 row(s) affected.
+
+Oct 20, 2018 8:44:50 AM MySQLAccess getTransaction
+INFO: >> SELECT * FROM assignment2_5510.transaction WHERE ID = 2;
+Oct 20, 2018 8:44:50 AM MySQLAccess printTransactions
+INFO: [ID: 2, NameOnCard: Dave, CardNumber: 11, ExpDate: test date, UnitPrice: 5.0, Quantity: 10, TotalPrice: 50.0, CreatedOn: 2018-11-16 07:00:00.0, CreatedBy: Cashier123]
+Oct 20, 2018 8:44:50 AM MySQLAccess printTransactions
+INFO: Completed.
+
+Oct 20, 2018 8:44:50 AM MySQLAccess createTransaction
+WARNING: Query failed.
+
+Oct 20, 2018 8:44:50 AM  
 FINER: THROW
-java.sql.SQLException: Access denied for user 'd_malone'@'localhost' (using password: YES)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '2' for key 'PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117)
 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
 	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:832)
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:456)
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:240)
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:207)
-	at java.sql.DriverManager.getConnection(Unknown Source)
-	at java.sql.DriverManager.getConnection(Unknown Source)
-	at MySQLAccess.setupConnection(MySQLAccess.java:36)
-	at Assignment2.main(Assignment2.java:17)
+	at com.mysql.cj.jdbc.StatementImpl.executeUpdateInternal(StatementImpl.java:1354)
+	at com.mysql.cj.jdbc.StatementImpl.executeLargeUpdate(StatementImpl.java:2127)
+	at com.mysql.cj.jdbc.StatementImpl.executeUpdate(StatementImpl.java:1264)
+	at MySQLAccess.createTransaction(MySQLAccess.java:111)
+	at Assignment2.main(Assignment2.java:28)
 
+Oct 20, 2018 8:44:50 AM MySQLAccess removeTransaction
+INFO: >> DELETE FROM assignment2_5510.transaction WHERE ID = 2
+Oct 20, 2018 8:44:50 AM MySQLAccess removeTransaction
+INFO: Completed: 1 row affected.
+
+Oct 20, 2018 8:44:50 AM MySQLAccess createTransaction
+INFO: >> INSERT INTO assignment2_5510.transaction (ID, NameOnCard, CardNumber, UnitPrice, Quantity, TotalPrice, ExpDate, CreatedOn, CreatedBy) VALUES (2,'Dave',11,5.0,10,50.0,'test date','2018-11-16 11:00:00.0','Cashier123')
+Oct 20, 2018 8:44:50 AM MySQLAccess createTransaction
+INFO: Completed: 1 row(s) affected.
+
+Oct 20, 2018 8:44:50 AM MySQLAccess getAllTransactions
+INFO: >> SELECT * FROM assignment2_5510.transaction;
+Oct 20, 2018 8:44:50 AM MySQLAccess printTransactions
+INFO: [ID: 1, NameOnCard: Sam, CardNumber: 11, ExpDate: test date, UnitPrice: 5.0, Quantity: 10, TotalPrice: 50.0, CreatedOn: 2018-11-16 07:00:00.0, CreatedBy: Cashier123]
+Oct 20, 2018 8:44:50 AM MySQLAccess printTransactions
+INFO: [ID: 2, NameOnCard: Dave, CardNumber: 11, ExpDate: test date, UnitPrice: 5.0, Quantity: 10, TotalPrice: 50.0, CreatedOn: 2018-11-16 07:00:00.0, CreatedBy: Cashier123]
+Oct 20, 2018 8:44:50 AM MySQLAccess printTransactions
+INFO: Completed.
+
+Oct 20, 2018 8:44:50 AM Assignment2 main
+INFO: Connection closed.

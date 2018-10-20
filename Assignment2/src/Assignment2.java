@@ -20,14 +20,14 @@ public class Assignment2 {
         	// create the test Transaction in the database table
 			dao.createTransaction(connection, transaction);
 			// alter the test Transaction and then update in database
-			transaction.setNameOnCard("Sam");
+			transaction.setNameOnCard("Dave");
 			dao.updateTransaction(connection, transaction);
 			// retrieve the updated transaction
-			dao.getTransaction(connection, 1);
+			dao.getTransaction(connection, 2);
 			// attempt to create the test Transaction again
 			dao.createTransaction(connection, transaction);
 			// remove the test Transaction according to the ID value
-			dao.removeTransaction(connection, 5);
+			dao.removeTransaction(connection, 2);
 			// now attempt again to create the test Transaction
 			dao.createTransaction(connection, transaction);
 			// finally print all contents of the table
@@ -47,7 +47,7 @@ public class Assignment2 {
 	// build out a simple Transaction to insert
 	public static Transaction createTestTransaction () {
 		Transaction trxn = new Transaction();
-		trxn.setId(1);
+		trxn.setId(2);
 		trxn.setNameOnCard("Dave");
 		trxn.setCardNumber(11);
 		trxn.setExpiryDate("test date");
