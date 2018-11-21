@@ -1,0 +1,41 @@
+package com.dmalone.mcda5510.service;
+
+import com.dmalone.mcda5510.entity.Transaction;
+
+public class TrxnWebService {
+
+	
+//	public void updateTransaction(int trxnID, String Name, String CardNumber,
+//			 double unitPrice, int qty, double totalPrice, String expDate){
+//		
+//	}
+//	
+//	public Transaction getTransaction(int trxnID){
+//   	dao.getAllTransactions(connection);
+//	// create the test Transaction in the database table
+//	dao.createTransaction(connection, transaction);
+//	// alter the test Transaction and then update in database
+//	transaction.setNameOnCard("Dave");
+//	dao.updateTransaction(connection, transaction);
+//	// retrieve the updated transaction
+//	dao.getTransaction(connection, 2);
+//	// attempt to create the test Transaction again
+//	dao.createTransaction(connection, transaction);
+//	// remove the test Transaction according to the ID value
+//	dao.removeTransaction(connection, 2);
+//	// now attempt again to create the test Transaction
+//	dao.createTransaction(connection, transaction);
+//	// finally print all contents of the table
+//	dao.getAllTransactions(connection);
+//
+//	
+//		return new Transaction();
+//	}
+	
+	
+
+	public float addValue(float value) {
+		return (value + 10);
+	}
+	
+}

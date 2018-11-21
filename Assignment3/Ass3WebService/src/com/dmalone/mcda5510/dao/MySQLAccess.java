@@ -1,0 +1,235 @@
+package com.dmalone.mcda5510.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.dmalone.mcda5510.connect.MySQLJDBCConnection;
+import com.dmalone.mcda5510.entity.Transaction;
+
+public class MySQLAccess {
+
+	// Fields
+	private static String database;
+	private static String table;
+	private static Logger logger;
+	public static Connection single_instance;
+	
+	// Constructor 
+	public MySQLAccess() {
+		// Establish logger
+		 logger = Logger.getLogger("Assignment3");
+		 database = "assignment2_5510";
+		 table = "transaction";
+	}
+	
+	public Connection getInstance() {
+		
+		
+		if (single_instance == null) {
+			MySQLJDBCConnection dbConnection = new MySQLJDBCConnection();
+			single_instance = dbConnection.setupConnection();
+		}
+		System.out.println("Hi from getInstance()...");
+		return single_instance;
+	}
+
+	public Collection<Transaction> getAllTransactions(Connection connection) {
+		Statement statement = null;
+		ResultSet resultSet = null;
+		Collection<Transaction> results = null;
+		// Result set get the result of the SQL query
+		try {
+			// Statements allow to issue SQL queries to the database
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery("select * from "+ database + "." + table);
+			results = createTrxns(resultSet);
+
+			if (resultSet != null) {
+				resultSet.close();
+			}
+
+			if (statement != null) {
+				statement.close();
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.throwing("", "", e);
+		} finally {
+			statement = null;
+			resultSet = null;
+		}
+		logger.info(">> SELECT * FROM " + database + "." + table + ";");
+		printTransactions(results);
+		return results;
+
+	}
+
+	private Collection<Transaction> createTrxns (ResultSet resultSet) throws SQLException {
+		Collection<Transaction> results = new ArrayList<Transaction>();
+		// ResultSet is initially before the first data set
+		while (resultSet.next()) {
+			Transaction trxn = new Transaction();
+			trxn.setNameOnCard(resultSet.getString("NameOnCard"));
+			trxn.setCardNumber(resultSet.getInt("CardNumber"));
+			trxn.setId(resultSet.getInt("ID"));
+			trxn.setExpiryDate(resultSet.getString("ExpDate"));
+			trxn.setUnitPrice(resultSet.getDouble("UnitPrice"));
+			trxn.setQuantity(resultSet.getInt("Quantity"));
+			// TotalPrice is auto calculated when Quantity or UnitPrice are updated 
+			trxn.setCreatedOn(resultSet.getTimestamp("CreatedOn"));
+			trxn.setCreatedBy(resultSet.getString("CreatedBy"));
+			
+			results.add(trxn);
+		}		
+		return results;
+	}
+
+	public boolean createTransaction (Connection connection, Transaction trxn) {
+		// Given a Transaction object, save it to the database
+		// Fails if object "id" already exists in the database
+		Statement statement = null;
+		int result;
+		String sql = "INSERT INTO " + database + "." + table
+				+ " (ID, NameOnCard, CardNumber, UnitPrice, Quantity, TotalPrice, ExpDate, CreatedOn, CreatedBy)"
+				+ " VALUES (" + trxn.getId() + ",'" + trxn.getNameOnCard() + "'," + trxn.getCardNumber() + "," + trxn.getUnitPrice() + ","
+				+ trxn.getQuantity() + "," + trxn.getTotalPrice() +",'"+ trxn.getExpiryDate() +"','"+ trxn.getCreatedOn() +"','" + trxn.getCreatedBy() + "')";
+		
+		try {
+			// Statements allow to issue SQL queries to the database
+			statement = connection.createStatement();			
+			result = statement.executeUpdate(sql);
+			
+			if (result == 1) {
+				logger.info(">> " + sql);
+				logger.info("Completed: " + result + " row(s) affected.\n");
+				statement.close();
+				return true;
+			}
+			else if (result == 0) {
+				logger.info(">> INSERT INTO __ (ID, NameOnCard, CardNumber, UnitPrice, Quantity, TotalPrice, ExpDate, CreatedOn, CreatedBy) VALUES ...");
+				logger.info("Incomplete: " + result + " rows affected.\n");
+				statement.close();
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.log(Level.WARNING, "Query failed.\n");
+			logger.throwing("", "", e);
+		} finally {
+			statement = null;
+		}
+		return false;
+	}
+	
+	public Collection<Transaction> getTransaction (Connection connection, int trxnID) {
+		Statement statement = null;
+		ResultSet resultSet = null;
+		Collection<Transaction> results = null;
+		String sql = "SELECT * FROM " + database + "." + table + " WHERE ID = " + trxnID + ";";
+		try {
+			// Statements allow to issue SQL queries to the database
+			statement = connection.createStatement();			
+			resultSet = statement.executeQuery(sql);
+			results = createTrxns(resultSet);
+
+			if (resultSet != null) {
+				resultSet.close();
+			}
+
+			if (statement != null) {
+				statement.close();
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.throwing("", "", e);
+		} finally {
+			statement = null;
+		}
+		// print a description of SQL operation before printing results
+		logger.info(">> " + sql);
+		printTransactions(results);
+		return results;
+	}
+	
+	public boolean removeTransaction (Connection connection, int trxnID) {
+		Statement statement = null;
+		int result=0;
+		try {
+			// Statements allow to issue SQL queries to the database
+			statement = connection.createStatement();
+			result = statement.executeUpdate("delete from assignment2_5510.transaction "
+												+ "where ID = " + trxnID +";");
+			if (result == 1) {
+				logger.info(">> DELETE FROM assignment2_5510.transaction WHERE ID = " + trxnID);
+				logger.info("Completed: 1 row affected.\n");
+				statement.close();
+				return true;
+			}
+			if (result == 0) {
+				logger.info(">> DELETE FROM assignment2_5510.transaction WHERE ID = " + trxnID);
+				logger.info("Completed: 0 row affected.\n");
+				statement.close();
+				return false;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.throwing("", "", e);
+		} finally {
+			statement = null;
+		}
+		return false;
+	}
+	
+	public boolean updateTransaction (Connection connection, Transaction trxn) {
+		// Given a Transaction object with an existing ID, updates the transaction
+		// Fails if object "id" does not exist in the database
+		Statement statement = null;
+		int result;
+		try {
+			// Statements allow to issue SQL queries to the database
+			statement = connection.createStatement();
+			String sql = "UPDATE assignment2_5510.transaction SET NameOnCard = '" + trxn.getNameOnCard() + "', CardNumber = " + trxn.getCardNumber()
+					 + ", UnitPrice = " + trxn.getUnitPrice() + ", Quantity = " + trxn.getQuantity() + ", TotalPrice = " + trxn.getTotalPrice()
+					 + ", ExpDate = '" + trxn.getExpiryDate() + "', CreatedOn = '" + trxn.getCreatedOn() + "', CreatedBy = '" + trxn.getCreatedBy()
+					 + "' WHERE ID = " + trxn.getId();
+			result = statement.executeUpdate(sql);
+
+			if (result == 1) {
+				logger.info(">> "+ sql);
+				logger.info("Completed: " + result + " row(s) affected.\n");
+				statement.close();
+				return true;
+			}
+			else if (result == 0) {
+				logger.info(">> "+ sql);
+				logger.info("Completed: " + result + " row(s) affected.\n");
+				statement.close();
+				return false;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.throwing("", "", e);
+		} finally {
+			statement = null;
+		}
+		return false;
+	}
+
+	
+	private void printTransactions (Collection<Transaction> trxns) {
+		for (Transaction trxn:trxns ){
+			logger.info(trxn.toString());
+		}
+		logger.info("Completed.\n");
+	}
+}

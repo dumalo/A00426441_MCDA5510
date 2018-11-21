@@ -1,0 +1,47 @@
+package com.dmalone.mcda5510.services;
+
+import java.io.IOException;
+import java.sql.Connection;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.dmalone.mcda5510.connect.MySQLJDBCConnection;
+import com.dmalone.mcda5510.entity.Transaction;
+/**
+ * Servlet implementation class Ass3Servlet
+ */
+@WebServlet("/Ass3Servlet")
+public class Ass3Servlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private static Connection single_instance;
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("<br><br>Hello<br><br>");
+	}
+
+	public static Connection getInstance() {
+		if (single_instance == null) {
+			MySQLJDBCConnection dbConnection = new MySQLJDBCConnection();
+			single_instance = dbConnection.setupConnection();
+		}
+		return single_instance;
+	}
+	
+//	/**
+//	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+//	 */
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//		doGet(request, response);
+//	}
+
+}

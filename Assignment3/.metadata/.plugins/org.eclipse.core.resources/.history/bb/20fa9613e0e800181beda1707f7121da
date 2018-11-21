@@ -1,0 +1,48 @@
+package com.dmalone.mcda5510.service;
+
+import com.dmalone.mcda5510.entity.Transaction;
+
+import java.sql.Connection;
+
+import com.dmalone.mcda5510.connect.MySQLJDBCConnection;
+import com.dmalone.mcda5510.dao.MySQLAccess;
+
+public class TrxnWebService {
+
+	
+//	public void updateTransaction(int trxnID, String Name, String CardNumber,
+//			 double unitPrice, int qty, double totalPrice, String expDate){
+//		
+//	}
+//	
+	private static Connection single_instance;
+	private static Connection connection;
+	private static MySQLAccess dao;
+	
+	private TrxnWebService () {
+		MySQLAccess dao = new MySQLAccess();
+		Connection connection = getInstance();
+	}
+
+	public static Connection getInstance() {
+		if (single_instance == null) {
+			MySQLJDBCConnection dbConnection = new MySQLJDBCConnection();
+			single_instance = dbConnection.setupConnection();
+		}
+		return single_instance;
+	}
+	
+	public Transaction getTransaction(int trxnID){
+		// retrieve the updated transaction
+		dao.getTransaction(connection, trxnID);
+
+		return new Transaction();
+	}
+	
+	
+
+	public float addValue(float value) {
+		return (value + 10);
+	}
+	
+}

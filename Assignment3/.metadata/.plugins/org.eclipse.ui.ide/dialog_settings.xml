@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Users\Duane\Google Drive\SMU\5510 Software\Assignment_submissions\A00426441_MCDA5510\Assignment3\Ass3WebServiceClient"/>
+		<item value="C:\Users\Duane\workspace\Ass3WebServiceClient"/>
+		<item value="C:\Users\Duane\workspace\Ass3WebService"/>
+		<item value="C:\Users\Duane\Google Drive\SMU\5510 Software\Assignment_submissions\A00426441_MCDA5510\Assignment3\Ass3WebService"/>
+		<item value="C:\Users\Duane\Google Drive\SMU\5510 Software\dev\Assignment3"/>
+		<item value="C:\Users\Duane\Google Drive\SMU\5510 Software\dev\Assignment2refactored"/>
+		<item value="C:\Users\Duane\Google Drive\SMU\5510 Software\dev\Assignment3Duane"/>
+		<item value="C:\Users\Duane\Google Drive\SMU\5510 Software\Assignment3Client"/>
+		<item value="C:\Users\Duane\Google Drive\SMU\5510 Software\Assignment3\Assignment3"/>
+	</list>
+	<section name="ExternalProjectImportWizard">
+		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\Duane\Google Drive\SMU\5510 Software\Assignment3Client"/>
+			<item value="C:\Users\Duane\Google Drive\SMU\5510 Software\dev\Assignment2"/>
+			<item value="C:\Users\Duane\Google Drive\SMU\5510 Software\Assignment3"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
+		</list>
+	</section>
+	<section name="ResourceNavigator">
+		<item value="Aggregate for window 1541441822417" key="ResourceWorkingSetFilter.STORE_WORKING_SET"/>
+		<item value="1" key="ResourceViewer.STORE_SORT_TYPE"/>
+	</section>
+	<section name="NewWizardAction">
+		<item value="org.eclipse.jst.servlet.ui.project.facet.WebProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.wst.web.ui"/>
+		</list>
+	</section>
+</section>

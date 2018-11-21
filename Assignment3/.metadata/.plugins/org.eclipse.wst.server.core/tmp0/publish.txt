@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Wed Nov 21 13:21:16 AST 2018
+org.eclipse.jst.jee.server\:Ass3WebService=C\:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\wtpwebapps\\Ass3WebService
+org.eclipse.jst.jee.server\:Assignment3=C\:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\wtpwebapps\\Assignment3

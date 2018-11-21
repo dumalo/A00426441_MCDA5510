@@ -1,0 +1,60 @@
+package com.dmalone.mcda5510;
+
+import java.sql.Timestamp;
+import java.sql.Connection;
+import java.util.logging.Logger;
+
+import com.dmalone.mcda5510.entity.Transaction;
+import com.dmalone.mcda5510.connect.MySQLJDBCConnection;
+import com.dmalone.mcda5510.dao.MySQLAccess;
+import com.dmalone.mcda5510.log.MyLog;
+
+public class Assignment3 {
+	
+	public static Connection single_instance;
+
+	public static Connection getInstance() {
+		if (single_instance == null) {
+			MySQLJDBCConnection dbConnection = new MySQLJDBCConnection();
+			single_instance = dbConnection.setupConnection();
+		}
+		return single_instance;
+	}
+	
+	public static void main(String[] args) {
+        
+		MyLog myLog = new MyLog();   // setup logger
+        Logger logger = myLog.setupLogger("Assignment3");
+		
+		MySQLAccess dao = new MySQLAccess();   // create a dao object
+        try {
+        	Connection connection = getInstance();
+//        	Leave the connection open
+//			if (connection != null) {
+//				connection.close();
+//				logger.info("Connection closed.");
+//			}
+			
+		} catch (Exception e) { 
+			e.printStackTrace();
+			logger.throwing("", "", e);
+		}
+	}
+	
+	// build out a simple Transaction to insert
+	public static Transaction createTestTransaction () {
+		Transaction trxn = new Transaction();
+		trxn.setId(2);
+		trxn.setNameOnCard("Dave");
+		trxn.setCardNumber(11);
+		trxn.setExpiryDate("test date");
+		trxn.setUnitPrice(5);
+		trxn.setQuantity(10);
+		// totalPrice is calculated in Transaction class
+		// createdOn should be created in the database with 'now()'
+		trxn.setCreatedOn(new Timestamp(118,10,16,11,00,00,0));
+		trxn.setCreatedBy("Cashier123");
+		return trxn;
+	}
+
+}

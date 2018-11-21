@@ -1,0 +1,60 @@
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess getAllTransactions
+INFO: >> SELECT * FROM assignment2_5510.transaction;
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess printTransactions
+INFO: [ID: 1, NameOnCard: Joe Smith, CardNumber: 123, ExpDate: 2022-10-31, UnitPrice: 1.5, Quantity: 2, TotalPrice: 3.0, CreatedOn: 2018-11-17 10:30:12.0, CreatedBy: Cashier 11]
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess printTransactions
+INFO: Completed.
+
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess createTransaction
+INFO: >> INSERT INTO assignment2_5510.transaction (ID, NameOnCard, CardNumber, UnitPrice, Quantity, TotalPrice, ExpDate, CreatedOn, CreatedBy) VALUES (2,'Dave',11,5.0,10,50.0,'test date','2018-11-16 11:00:00.0','Cashier123')
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess createTransaction
+INFO: Completed: 1 row(s) affected.
+
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess updateTransaction
+INFO: >> UPDATE assignment2_5510.transaction SET NameOnCard = 'Dave', CardNumber = 11, UnitPrice = 5.0, Quantity = 10, TotalPrice = 50.0, ExpDate = 'test date', CreatedOn = '2018-11-16 11:00:00.0', CreatedBy = 'Cashier123' WHERE ID = 2
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess updateTransaction
+INFO: Completed: 1 row(s) affected.
+
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess getTransaction
+INFO: >> SELECT * FROM assignment2_5510.transaction WHERE ID = 2;
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess printTransactions
+INFO: [ID: 2, NameOnCard: Dave, CardNumber: 11, ExpDate: test date, UnitPrice: 5.0, Quantity: 10, TotalPrice: 50.0, CreatedOn: 2018-11-16 07:00:00.0, CreatedBy: Cashier123]
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess printTransactions
+INFO: Completed.
+
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess createTransaction
+WARNING: Query failed.
+
+Nov 17, 2018 2:54:11 PM  
+FINER: THROW
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '2' for key 'PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeUpdateInternal(StatementImpl.java:1354)
+	at com.mysql.cj.jdbc.StatementImpl.executeLargeUpdate(StatementImpl.java:2127)
+	at com.mysql.cj.jdbc.StatementImpl.executeUpdate(StatementImpl.java:1264)
+	at com.dmalone.mcda5510.dao.MySQLAccess.createTransaction(MySQLAccess.java:93)
+	at com.dmalone.mcda5510.Assignment3.main(Assignment3.java:45)
+
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess removeTransaction
+INFO: >> DELETE FROM assignment2_5510.transaction WHERE ID = 2
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess removeTransaction
+INFO: Completed: 1 row affected.
+
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess createTransaction
+INFO: >> INSERT INTO assignment2_5510.transaction (ID, NameOnCard, CardNumber, UnitPrice, Quantity, TotalPrice, ExpDate, CreatedOn, CreatedBy) VALUES (2,'Dave',11,5.0,10,50.0,'test date','2018-11-16 11:00:00.0','Cashier123')
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess createTransaction
+INFO: Completed: 1 row(s) affected.
+
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess getAllTransactions
+INFO: >> SELECT * FROM assignment2_5510.transaction;
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess printTransactions
+INFO: [ID: 1, NameOnCard: Joe Smith, CardNumber: 123, ExpDate: 2022-10-31, UnitPrice: 1.5, Quantity: 2, TotalPrice: 3.0, CreatedOn: 2018-11-17 10:30:12.0, CreatedBy: Cashier 11]
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess printTransactions
+INFO: [ID: 2, NameOnCard: Dave, CardNumber: 11, ExpDate: test date, UnitPrice: 5.0, Quantity: 10, TotalPrice: 50.0, CreatedOn: 2018-11-16 07:00:00.0, CreatedBy: Cashier123]
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.dao.MySQLAccess printTransactions
+INFO: Completed.
+
+Nov 17, 2018 2:54:11 PM com.dmalone.mcda5510.Assignment3 main
+INFO: Connection closed.
