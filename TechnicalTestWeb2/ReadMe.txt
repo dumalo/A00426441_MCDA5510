@@ -3,6 +3,9 @@ set of shipments associated with their customer account.
 
 Please make a copy of this git repo in your repo called TechnicalTestWeb2
 Please make updates in this file and to the code and push when complete( or end of class) 
+Duane Malone
+Sreeraj Punnoli
+
 
 Item 1: Setup..
 There is script file located in the "SQL Script", directory.
@@ -14,6 +17,9 @@ There is one compilation error in the project fix it.
 
 Please Answer:
 What was it?  How did you fix?
+>> Changed ServiceTypes to ServiceType.
+>> Also had to update a compiler in the NuGet Package Manager console using the following command:
+Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
 
 Item 3:
 The Shipments link in the menu bar of the app is not working, 
@@ -21,6 +27,7 @@ it should like to the index page of the ShipmentsController
 
 Please Answer:
 What was it?  How did you fix?
+>> And error in the _Layout file. "Shipppments" was changed to "Shipments" 
 
 Item 4:
 Make the name label for the Customer on the shipment object say "Customer Name" in all places
